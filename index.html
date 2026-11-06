@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>kamus-atho : Kamus Pribadi &amp; Daftar Kata Harian Atho</title>
+  <meta name="description" content="Catatan kosakata pribadi Atho, daftar kata yang sering digunakan sehari-hari, plesetan, dan artinya.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&amp;family=M+PLUS+Rounded+1c:wght@700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <a href="#konten-utama" class="skip-link">Loncat ke isi kamus</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#meja-cari" class="brand-identity" aria-label="Beranda kamus-atho">
+        <span class="brand-clip" aria-hidden="true">
+          <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 2L20 18H2L11 2Z" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="brand-title">kamus-atho</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Navigasi bagian halaman">
+        <a href="#meja-cari" class="nav-link">Pencarian</a>
+        <a href="#sering-dipakai" class="nav-link">Sering Dipakai</a>
+        <a href="#indeks-kamus" class="nav-link">Indeks A-Z</a>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" id="btn-buka-modal" class="btn btn-primary">
+          + Susun Kata (JSON)
+        </button>
+        <button type="button" id="btn-tema" class="btn btn-outline" aria-pressed="false">
+          <span id="label-tema">Mode Gelap</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="konten-utama" class="container main-content">
+    <section id="meja-cari" class="hero-desk" aria-labelledby="judul-utama">
+      <div class="hero-card-visual">
+        <div class="hero-copy">
+          <div class="title-with-motif">
+            <h1 id="judul-utama">Lembar Kosakata &amp; Istilah Harian Atho</h1>
+            <svg class="ribbon-underline" viewBox="0 0 320 12" fill="none" aria-hidden="true">
+              <path d="M2 8.5C72 2 145 11.5 218 5.5C258 2.2 290 6.5 318 4" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p class="hero-description">
+            Tempat menyimpan daftar kata, singkatan, dan plesetan yang sering dipakai Atho beserta artinya. Seluruh angka di bawah ini dihitung langsung dari data nyata di <code>data/words.json</code>.
+          </p>
+
+          <dl class="live-stats" aria-label="Ringkasan jumlah data kamus">
+            <div class="stat-box">
+              <dt>Total Kata Tercatat</dt>
+              <dd id="stat-total">0</dd>
+            </div>
+            <div class="stat-box stat-box-gold">
+              <dt>Sering Dipakai</dt>
+              <dd id="stat-sering">0</dd>
+            </div>
+            <div class="stat-box">
+              <dt>Menunggu Arti</dt>
+              <dd id="stat-belum">0</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="search-console" role="search" aria-label="Filter dan pencarian kamus">
+        <div class="search-field-group">
+          <label for="input-cari" class="search-label">
+            <span>Cari Kata atau Arti</span>
+            <kbd class="keycap" title="Tekan garis miring untuk fokus ke kolom cari">/</kbd>
+          </label>
+          <div class="search-input-wrap">
+            <input
+              type="search"
+              id="input-cari"
+              class="search-input"
+              placeholder="Ketik kata (misal: gtw, agy, vibecoding, kuliah)..."
+              autocomplete="off"
+            >
+            <button type="button" id="btn-hapus-cari" class="btn btn-ghost btn-clear-search" hidden>
+              Bersihkan
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <span class="filter-group-label" id="label-filter-kategori">Tampilkan Kelompok:</span>
+          <div class="filter-tabs" role="group" aria-labelledby="label-filter-kategori">
+            <button type="button" class="filter-tab is-active" data-filter="all" aria-pressed="true">
+              Semua Kata (<span id="count-tab-all">0</span>)
+            </button>
+            <button type="button" class="filter-tab" data-filter="frequent" aria-pressed="false">
+              <span class="triangle-mark" aria-hidden="true">△</span> Sering Dipakai (<span id="count-tab-frequent">0</span>)
+            </button>
+            <button type="button" class="filter-tab" data-filter="incomplete" aria-pressed="false">
+              Perlu Arti (<span id="count-tab-incomplete">0</span>)
+            </button>
+          </div>
+        </div>
+
+        <div class="alphabet-group">
+          <div class="alphabet-header">
+            <span class="filter-group-label" id="label-filter-abjad">Indeks Huruf Awal:</span>
+            <button type="button" id="btn-reset-filter" class="btn-text-action" hidden>
+              Reset Semua Filter
+            </button>
+          </div>
+          <div id="bar-abjad" class="alphabet-bar" role="group" aria-labelledby="label-filter-abjad">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="state-loading" class="status-panel" aria-live="polite">
+      <div class="status-box">
+        <p class="status-title">Sedang memuat lembar kamus Atho...</p>
+        <p class="status-desc">Membaca daftar kata dan arti dari <code>data/words.json</code>.</p>
+      </div>
+    </section>
+
+    <section id="state-error" class="status-panel" aria-live="assertive" hidden>
+      <div class="status-box status-box-error">
+        <p class="status-title">Gagal memuat file data/words.json</p>
+        <p id="pesan-error-detail" class="status-desc">
+          File JSON tidak dapat diakses atau formatnya tidak valid. Pastikan Anda membuka halaman melalui GitHub Pages atau server lokal.
+        </p>
+        <div class="status-actions">
+          <button type="button" id="btn-coba-lagi" class="btn btn-primary">Coba Muat Ulang</button>
+          <button type="button" id="btn-pakai-cadangan" class="btn btn-outline">Gunakan Salinan Data Bawaan</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="state-empty" class="status-panel" aria-live="polite" hidden>
+      <div class="status-box">
+        <p id="judul-empty" class="status-title">Tidak ada kata yang cocok dengan pencarian ini</p>
+        <p id="pesan-empty-detail" class="status-desc">
+          Coba gunakan kata kunci lain, pilih semua huruf, atau tambahkan kata tersebut ke dalam kamus.
+        </p>
+        <div class="status-actions">
+          <button type="button" id="btn-empty-reset" class="btn btn-primary">Reset Pencarian &amp; Filter</button>
+          <button type="button" id="btn-empty-tambah" class="btn btn-outline">+ Tambahkan Kata Ini</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="sering-dipakai" class="frequent-section" aria-labelledby="judul-sering" hidden>
+      <div class="section-header">
+        <div>
+          <h2 id="judul-sering" class="section-title">
+            <span class="gold-clip-badge" aria-hidden="true">
+              <svg width="18" height="16" viewBox="0 0 22 20" fill="none">
+                <path d="M11 2L20 18H2L11 2Z" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            Kata yang Sering Digunakan
+          </h2>
+          <p class="section-subtitle">
+            Daftar kosakata harian yang ditandai dengan klip segitiga emas untuk akses cepat.
+          </p>
+        </div>
+        <span id="badge-jumlah-sering" class="section-count">0 kata</span>
+      </div>
+      <div id="grid-sering" class="frequent-strip"></div>
+    </section>
+
+    <section id="indeks-kamus" class="dictionary-section" aria-labelledby="judul-indeks" hidden>
+      <div class="section-header">
+        <div>
+          <h2 id="judul-indeks" class="section-title">Indeks Lengkap Kamus A-Z</h2>
+          <p id="subjudul-indeks" class="section-subtitle">
+            Menampilkan seluruh kata yang tersimpan, diurutkan berdasarkan abjad.
+          </p>
+        </div>
+        <div class="section-header-actions">
+          <span id="badge-jumlah-tampil" class="section-count">0 kata ditampilkan</span>
+        </div>
+      </div>
+      <div id="wadah-abjad" class="alphabet-groups-container"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-info">
+        <p class="footer-brand"><strong>kamus-atho</strong> : Indeks Kosakata Pribadi Atho</p>
+        <p class="footer-note">
+          Berjalan sebagai situs statis GitHub Pages. Data kosakata dikelola di <code>data/words.json</code>.
+        </p>
+      </div>
+      <div class="footer-links">
+        <a href="#meja-cari" class="btn btn-outline">Kembali ke Pencarian Atas</a>
+        <button type="button" id="btn-footer-json" class="btn btn-outline">Ekspor / Unduh words.json</button>
+      </div>
+    </div>
+  </footer>
+
+  <dialog id="modal-susun-kata" class="word-modal" aria-labelledby="judul-modal">
+    <div class="modal-inner">
+      <div class="modal-header">
+        <div>
+          <h2 id="judul-modal" class="modal-title">Susun atau Perbarui Kata</h2>
+          <p class="modal-subtitle">
+            Simpan perubahan di browser Anda lalu salin atau unduh <code>words.json</code> untuk di-commit ke GitHub.
+          </p>
+        </div>
+        <button type="button" id="btn-tutup-modal" class="btn btn-outline btn-close-modal" aria-label="Tutup jendela">
+          Tutup (Esc)
+        </button>
+      </div>
+
+      <form id="form-kata" class="word-form" novalidate>
+        <input type="hidden" id="input-id-kata" value="">
+
+        <div class="form-field">
+          <label for="input-nama-kata" class="form-label">Kata / Istilah <span class="required-mark">(Wajib)</span></label>
+          <input
+            type="text"
+            id="input-nama-kata"
+            class="form-input"
+            placeholder="Contoh: gtw, codeg, manuk akal"
+            required
+          >
+        </div>
+
+        <div class="form-field">
+          <label for="input-arti-kata" class="form-label">Arti Versi Atho <span class="required-mark">(Wajib)</span></label>
+          <textarea
+            id="input-arti-kata"
+            class="form-textarea"
+            rows="3"
+            placeholder="Tuliskan arti atau penjelasan singkat dari kata tersebut..."
+            required
+          ></textarea>
+        </div>
+
+        <div class="form-field form-field-checkbox">
+          <label class="checkbox-label" for="input-sering-kata">
+            <input type="checkbox" id="input-sering-kata" class="form-checkbox" checked>
+            <span>Tandai sebagai <strong>Kata yang Sering Digunakan</strong> (klip segitiga emas)</span>
+          </label>
+        </div>
+
+        <p id="pesan-validasi-form" class="form-feedback" role="alert" hidden></p>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Simpan ke Daftar Kamus</button>
+          <button type="button" id="btn-reset-form" class="btn btn-outline">Kosongkan Form</button>
+        </div>
+      </form>
+
+      <div class="json-export-box">
+        <div class="json-export-header">
+          <h3 class="json-export-title">Output File <code>data/words.json</code></h3>
+          <div class="json-export-actions">
+            <button type="button" id="btn-salin-json" class="btn btn-outline">Salin Semua JSON</button>
+            <button type="button" id="btn-unduh-json" class="btn btn-primary">Unduh words.json</button>
+            <button type="button" id="btn-hapus-lokal" class="btn btn-ghost">Reset ke Data Asli Repo</button>
+          </div>
+        </div>
+        <pre id="pratinjau-json" class="json-preview" tabindex="0" aria-label="Pratinjau isi file words.json"></pre>
+      </div>
+    </div>
+  </dialog>
+
+  <div id="toast-notifikasi" class="toast-banner" role="status" aria-live="polite" hidden></div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

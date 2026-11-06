@@ -1,0 +1,206 @@
+[
+  {
+    "id": "kata-001",
+    "word": "gtw",
+    "meaning": "nggak tau = tidak tau",
+    "frequent": true
+  },
+  {
+    "id": "kata-002",
+    "word": "codeg",
+    "meaning": "codex chatgpt",
+    "frequent": true
+  },
+  {
+    "id": "kata-003",
+    "word": "baig",
+    "meaning": "baik",
+    "frequent": true
+  },
+  {
+    "id": "kata-004",
+    "word": "tidor/tidur",
+    "meaning": "membosankan",
+    "frequent": true
+  },
+  {
+    "id": "kata-005",
+    "word": "ooo",
+    "meaning": "[BELUM ADA ARTI - Klik Susun Kata JSON untuk melengkapi arti]",
+    "frequent": true
+  },
+  {
+    "id": "kata-006",
+    "word": "cool yeah",
+    "meaning": "kuliah",
+    "frequent": false
+  },
+  {
+    "id": "kata-007",
+    "word": "agy",
+    "meaning": "antigravity google",
+    "frequent": true
+  },
+  {
+    "id": "kata-008",
+    "word": "sekumlah",
+    "meaning": "sekolah",
+    "frequent": false
+  },
+  {
+    "id": "kata-009",
+    "word": "hoemmm",
+    "meaning": "hmmmm",
+    "frequent": true
+  },
+  {
+    "id": "kata-010",
+    "word": "hmmmm",
+    "meaning": "berpikir",
+    "frequent": true
+  },
+  {
+    "id": "kata-011",
+    "word": "haiya/hayya",
+    "meaning": "haiya (bahasa cina)",
+    "frequent": false
+  },
+  {
+    "id": "kata-012",
+    "word": "relief style",
+    "meaning": "style mengetik dengan awal huruf besar dan akhir huruf kecil",
+    "frequent": false
+  },
+  {
+    "id": "kata-013",
+    "word": "dipsegs",
+    "meaning": "deepseek ai",
+    "frequent": true
+  },
+  {
+    "id": "kata-014",
+    "word": "uh dumb",
+    "meaning": "adam",
+    "frequent": false
+  },
+  {
+    "id": "kata-015",
+    "word": "da niga",
+    "meaning": "da capo (visual novel)",
+    "frequent": false
+  },
+  {
+    "id": "kata-016",
+    "word": "msg",
+    "meaning": "mysubarugweh/myspicagweh",
+    "frequent": false
+  },
+  {
+    "id": "kata-017",
+    "word": "manuk akal",
+    "meaning": "masuk akal",
+    "frequent": true
+  },
+  {
+    "id": "kata-018",
+    "word": "athowoilah",
+    "meaning": "panggilan plesetan untuk athoillah",
+    "frequent": false
+  },
+  {
+    "id": "kata-019",
+    "word": "hooo",
+    "meaning": "[BELUM ADA ARTI - Klik Susun Kata JSON untuk melengkapi arti]",
+    "frequent": true
+  },
+  {
+    "id": "kata-020",
+    "word": "gas",
+    "meaning": "ayo segera",
+    "frequent": true
+  },
+  {
+    "id": "kata-021",
+    "word": "gtw lagi dah",
+    "meaning": "menyerah dan sudah tidak tau apa lagi yang bisa dilakukan",
+    "frequent": true
+  },
+  {
+    "id": "kata-022",
+    "word": "copastool",
+    "meaning": "projek github atho64/copastool",
+    "frequent": false
+  },
+  {
+    "id": "kata-023",
+    "word": "baplo",
+    "meaning": "pablo",
+    "frequent": false
+  },
+  {
+    "id": "kata-024",
+    "word": "vibecoding",
+    "meaning": "coding dengan ai",
+    "frequent": true
+  },
+  {
+    "id": "kata-025",
+    "word": "apah iyah",
+    "meaning": "apakah benar?",
+    "frequent": true
+  },
+  {
+    "id": "kata-026",
+    "word": "iyah",
+    "meaning": "iya",
+    "frequent": true
+  },
+  {
+    "id": "kata-027",
+    "word": "fronttod",
+    "meaning": "dev/pub vn frontwing",
+    "frequent": false
+  },
+  {
+    "id": "kata-028",
+    "word": "tl vn",
+    "meaning": "menerjemahkan visual novel",
+    "frequent": true
+  },
+  {
+    "id": "kata-029",
+    "word": "mikocok",
+    "meaning": "microsoft",
+    "frequent": false
+  },
+  {
+    "id": "kata-030",
+    "word": "windawg",
+    "meaning": "windows",
+    "frequent": false
+  },
+  {
+    "id": "kata-031",
+    "word": "indogs",
+    "meaning": "indonesia",
+    "frequent": false
+  },
+  {
+    "id": "kata-032",
+    "word": "termugs",
+    "meaning": "app android termux",
+    "frequent": false
+  },
+  {
+    "id": "kata-033",
+    "word": "andorowed",
+    "meaning": "android",
+    "frequent": false
+  },
+  {
+    "id": "kata-034",
+    "word": "Untuk nyata",
+    "meaning": "for real",
+    "frequent": true
+  }
+]
