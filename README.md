@@ -4,6 +4,8 @@ Kamus pribadi Atho: daftar kata, singkatan, dan plesetan yang sering dipakai bes
 
 Situs statis (HTML, CSS, dan JavaScript murni) yang berjalan di GitHub Pages. Data kata ada di `data/words.json`.
 
+Buka situsnya: https://atho64.github.io/kamus-atho/
+
 ## Fitur
 
 - Pencarian kata dan arti (tekan `/` untuk fokus ke kolom cari)
